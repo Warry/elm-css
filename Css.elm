@@ -219,7 +219,7 @@ backgroundPosition :
     , center : CssProperty
     , centerLeft : CssProperty
     , centerRight : CssProperty
-    , custom : a -> (String, a)
+    , custom : String -> CssProperty
     , topCenter : CssProperty
     , topLeft : CssProperty
     , topRight : CssProperty
@@ -1360,7 +1360,7 @@ animationName = (,) "animation-name"
 
 {-| Specifies the speed curve of the animation - CSS#3 -}
 animationTimingFunction :
-    { bezier : Int -> (String, Int -> Int -> Int -> String)
+    { bezier : Int -> Int -> Int -> Int -> CssProperty
     , ease : CssProperty
     , easeIn : CssProperty
     , easeOut : CssProperty
@@ -1371,7 +1371,7 @@ animationTimingFunction =
   , ease            = (,) "animation-timing-function" "ease"
   , easeIn          = (,) "animation-timing-function" "ease-in"
   , easeOut         = (,) "animation-timing-function" "ease-out"
-  , bezier          = (,) "animation-timing-function" << cubicBezier
+  , bezier i j k l  = (,) "animation-timing-function" (cubicBezier i j k l)
   }
 
 cubicBezier : Int -> Int -> Int -> Int -> String
@@ -1405,7 +1405,7 @@ perspectiveOrigin :
     , center : CssProperty
     , centerLeft : CssProperty
     , centerRight : CssProperty
-    , custom : a -> (String, a)
+    , custom : String -> CssProperty
     , topCenter : CssProperty
     , topLeft : CssProperty
     , topRight : CssProperty
@@ -1435,7 +1435,7 @@ transformOrigin :
     , center : CssProperty
     , centerLeft : CssProperty
     , centerRight : CssProperty
-    , custom : a -> (String, a)
+    , custom : String -> CssProperty
     , topCenter : CssProperty
     , topLeft : CssProperty
     , topRight : CssProperty
@@ -1479,7 +1479,7 @@ transitionDuration = (,) "transition-duration" << durationToString
 
 {-| Specifies the speed curve of the transition effect - CSS#3 -}
 transitionTimingFunction :
-    { bezier : Int -> (String, Int -> Int -> Int -> String)
+    { bezier : Int -> Int -> Int -> Int -> CssProperty
     , ease : CssProperty
     , easeIn : CssProperty
     , easeInOut : CssProperty
@@ -1492,7 +1492,7 @@ transitionTimingFunction =
   , easeIn          = (,) "transition-timing-function" "ease-in"
   , easeOut         = (,) "transition-timing-function" "ease-out"
   , easeInOut       = (,) "transition-timing-function" "ease-in-out"
-  , bezier          = (,) "transition-timing-function" << cubicBezier
+  , bezier i j k l  = (,) "transition-timing-function" (cubicBezier i j k l)
   }
 
 {-| Specifies when the transition effect will start - CSS#3 --}
